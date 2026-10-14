@@ -112,7 +112,7 @@ forge script script/Deploy.s.sol --broadcast   # deploy
 
 ---
 
-## The one habit that unlocks everything: **variables, not hardcoding**
+## The one habit that pays off all term: **variables, not hardcoding**
 
 Anything that changes — the node, the address, your key, the token — is passed as a **variable**, so the *same tool* points anywhere without editing code:
 ```shell

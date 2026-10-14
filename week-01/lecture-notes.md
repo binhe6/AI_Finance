@@ -2,7 +2,7 @@
 
 ## Lecture Notes
 
-> **How this course works (say this on Day 1):** No PowerPoint. All notes are AI-generated Markdown, published to GitHub/Drive. We don't *study* the chain — we *build* on it. Every concept climbs the same **five-rung ladder**: (R1) see it → (R2) use it in a wallet → (R3) call it with code → (R4) build your own → (R5) hand it to your agent. Everything runs on **testnet — no real money, ever.**
+> **How this course works (say this on Day 1):** No PowerPoint — all notes are plain Markdown, published to GitHub/Drive. We don't *study* the chain — we *build* on it. Every concept climbs the same **five-rung ladder**: (R1) see it → (R2) use it in a wallet → (R3) call it with code → (R4) build your own → (R5) hand it to your agent. Everything runs on **testnet — no real money, ever.**
 
 ### Learning Objectives
 
@@ -42,7 +42,7 @@ Before we install tools, let's be clear about *what we're actually dealing with*
 **① A blockchain = one objective, public ledger that can only change by the rules.**
 It's not a company's database (a company can quietly edit its own). It's a snapshot of state that **the whole network agrees on, anyone can read, and updates only by fixed rules**. "How much you have, what's locked in this contract" isn't "whatever some server says" — it's an **objective fact** anyone can independently verify. This is the bedrock for everything later: agents can do business without trusting each other precisely because the ledger is objective and the rules execute automatically.
 
-**② Two main chains, two accounting models (get this difference and you understand half the field).**
+**② Two main chains, two accounting models (get this difference and a lot of the rest clicks into place).**
 
 | | **Bitcoin** | **Ethereum** |
 |---|---|---|
@@ -51,9 +51,9 @@ It's not a company's database (a company can quietly edit its own). It's a snaps
 | What it can compute | script is **deliberately limited**: multisig, timelocks, hashlocks — mainly "who's allowed to spend this" | **Turing-complete**: arbitrary logic, and an address can also carry **code (a contract)** |
 | Best at | simple, rock-solid, ultra-auditable **store & transfer of value** | arbitrary **financial logic** — DeFi, lending, AMMs live here |
 
-In one line: **Bitcoin makes "money" maximally simple and reliable; Ethereum ties "money + programmable rules" together.** This course builds "agents that execute financial strategy on their own," which needs **programmable rules** — so our main arena is **Ethereum-family (EVM) chains and their cheap Layer-2s**. (Bitcoin isn't "worse," it's a **different trade-off** — we revisit this in Week 6 on market structure.)
+In one line: **Bitcoin keeps "money" simple and hard to break; Ethereum ties "money + programmable rules" together.** This course builds "agents that execute financial strategy on their own," which needs **programmable rules** — so our main arena is **Ethereum-family (EVM) chains and their cheap Layer-2s**. (Bitcoin isn't "worse," it's a **different trade-off** — we revisit this in Week 6 on market structure.)
 
-> **R1 live demo (open it in class):** <https://txcity.io/v/eth-btc> — the two streets are **Ethereum vs. Bitcoin**, side by side. It turns each chain into a bus system: **people queuing = pending transactions, each bus = a block, the fare = the fee.** A free live view of these two models. **Plant one detail — "the higher-fare person boards first" — Week 4's MEV grows straight out of it.**
+> **R1 live demo (open it in class):** <https://txcity.io/v/eth-btc> — the two streets are **Ethereum vs. Bitcoin**, side by side. It turns each chain into a bus system: **people queuing = pending transactions, each bus = a block, the fare = the fee.** A free live view of these two models. **One detail worth planting: the higher-fare rider boards first — on-chain, a higher fee buys earlier inclusion.**
 
 **③ A smart contract is just "that piece of code attached to an address."**
 Because Ethereum is an account-plus-code model, you can write "loan terms" or "swap rules" as a program deployed at an address that anyone can call, that runs exactly as written, and that no one can alter mid-way. **"Law becomes code," in technical terms, is exactly this.** (More in Part 5.)
@@ -109,7 +109,7 @@ To *do* anything on-chain, you send a **transaction** — a message signed by yo
 - The network **recovers your address from the signature** — proving it's you — without you revealing the key.
 - The **nonce** (a counter) stops the same signed message from being replayed twice.
 
-**This "sign an intent, the network verifies and executes" pattern is the spine of everything** — it's the same shape as an agent placing a trade or authorizing a payment (we'll see it again in Weeks 5–6).
+**This "sign an intent, the network verifies and executes" pattern is the spine of the course** — it's the same shape as an agent placing a trade or authorizing a payment (we'll see it again in Weeks 5–6).
 
 ### Hands-On: The Four Basic web3.py Operations (R3 code + R2 UI)
 
@@ -153,7 +153,7 @@ A **smart contract** is a program deployed to an address. Anyone can call its fu
 
 In class you ran three things **by hand** (read / send / interact). The **homework** (see `lab-exercise.md`) has you do the core arc yourself on Base Sepolia: prove your environment, **read** the chain, and **send** an asset to a classmate — R1→R3, no magic left standing.
 
-> **Where the agent comes in:** handing these operations to a self-signing agent — and the guardrails that must come with a private key — is the job of **Week 5** ("coordinator / signer separation"), not Week 1.
+> **Where the agent comes in:** handing these operations to a self-signing agent — and the guardrails that must come with a private key — is the job of **Week 4** (the agent: *brain judges, hands execute*, behind a confirm gate), not Week 1.
 
 ### Part 7: This Session Is the Map of the Whole Course (each week answers a question Week 1 raises)
 
@@ -164,7 +164,6 @@ Today you managed to "hold + transfer an asset." Follow that one thing forward, 
 | You can transfer, but **nobody trades with you** | **Week 2: AMM** — swapping with no counterparty |
 | Liquidity is deep, and you want **limit orders / leverage** | **Week 6: central-limit order books (CLOB) + perpetuals & derivatives** (Hyperliquid) |
 | You want to **use money without selling your coins** | **Week 3: lending & liquidation** |
-| Your tx must **queue in a public waiting room**, and order decides who profits | **Week 4: MEV** — order = money, tied to chain mechanics & the **mempool**; traditional **HFT** plays the same "who's first" game |
 | **Hand any of the above to an agent** that signs and executes on its own | **Weeks 5 & 7: agent-ification and integration** |
 
 > **In one line: Week 1 teaches you to *touch* this objective world (read + send one); every week after teaches you to *do* something more complex on it; and finally, to hand it to an agent.**
@@ -178,7 +177,7 @@ Today you managed to "hold + transfer an asset." Follow that one thing forward, 
 A **stablecoin** (e.g., USDC) is a token pegged to $1. It's the unit everyone prices in, because raw crypto is too volatile to quote a coffee in.
 
 - On-chain, USDC is *just a smart contract* tracking balances.
-- It supports **gasless transfer authorizations** (EIP-3009) — you *sign* a transfer and someone else submits it. **Hold onto this; it's the engine of the x402 payment agent in Week 5.**
+- It supports **gasless transfer authorizations** (EIP-3009) — you *sign* a transfer and someone else submits it. **Hold onto this; it's the engine of the x402 payment agent in Week 7.**
 
 ### Part 2: Swap and the AMM (`x * y = k`)
 
